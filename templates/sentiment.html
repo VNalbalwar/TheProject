@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="/static/preloader.css">
+</head>
+
+<body>
+    <div id="preloader"></div>
+    <h1>Sentiment Analysis</h1>
+    <form method="POST" id="sentimentForm">
+        <label for="userInput">Enter text for sentiment analysis:</label>
+        <input type="text" name="user_input" id="userInput" required style="margin-bottom: 15px;" size="40">
+        <input type="submit" value="Analyze Sentiment">
+    </form>
+    <div id="sentimentResult">
+        <h2>Sentiment Analysis Results:</h2>
+        <p id="sentiment"></p>
+    </div>
+    <script>
+        const sentimentForm = document.querySelector('#sentimentForm');
+        const sentimentResultElement = document.querySelector('#sentiment');
+
+        sentimentForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(sentimentForm);
+            const response = await fetch('/sentiment', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            sentimentResultElement.textContent = JSON.stringify(data.sentiment);
+        });
+    </script>
+    <script src="/static/preloader.js"></script>
+</body>
+</html>

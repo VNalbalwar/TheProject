@@ -1,0 +1,12 @@
+#preloader {
+  background: #ffffff url(/static/preloader.gif) no-repeat center center;
+  background-size: 20%;
+  height: 100vh;
+  width: 100%;
+  opacity: 1;
+  z-index: -1;
+  transition: opacity 1s ease-out; 
+}
+body {
+  overflow: hidden;
+}
